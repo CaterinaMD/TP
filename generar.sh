@@ -20,7 +20,7 @@ fi
 
 for i in $(seq "$cantidad");
 do
-	archivo=$(cut -d "," -f 1 Nombres.txt | shuf -n 1)
+	archivo=$(cut -d "," -f 1 Nombres.txt | tr " " "_"  | shuf -n 1)
 	curl -o "${archivo}.jpeg" "https://thispersondoesnotexist.com/"
 
 	# echo "Comprimimos archivo cambiando su tamaño"
