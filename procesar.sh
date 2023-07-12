@@ -3,12 +3,12 @@ directorio="archivo_descomprimido"
 if [ -d archivo_descomprimido ];
 then
 	datos=$(ls "$directorio")
-	if [ -e tamaño_imagen ];
+	if [ -e tamano_imagen ];
 	then
 		rm -r tamano_imagen
 	fi
 	mkdir tamano_imagen
-	echo "$datos"
+
 	for archivo in $datos;
 	do
 		if [[ $archivo =~ [A-Z][a-z]+_[A-Z][a-z]+\.jpeg  ]];
