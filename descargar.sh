@@ -10,32 +10,28 @@ then
 	rm imagen.zip
 fi
 
-urlImagen=$1
-urlSumaDeVerificacion=$2
+url_imagen=$1
+url_sumaverificacion=$2
 
-curl -o "imagen.jpeg" "$urlImagen"
-#curl -o "sumaDeVerificacionUrl.txt" "$urlSumaDeVerificacion"
+curl -L -o imagen.zip "$url_imagen"
+curl -o sumaverificacion_url.txt "$url_sumaverificacion"
 
-sha256sum "imagen.jpeg" > sumaDeVerificacionImagen.txt
-sumaDeVerificacionImagen=$(cut -d " " -f 1 sumaDeVerificacionImagen.txt)
-sumaDeVerificacionUrl=$(cat sumaDeVerificacionUrl.txt)
+sha256sum "imagen.zip" > sumaverificacion_imagen.txt
+sumaverificacion_imagen=$(cut -d " " -f 1 sumaverificacion_imagen.txt)
+sumaverificacion_url=$(cat sumaverificacion_url.txt)
 
-if [ "$sumaDeVerificacionImagen" == "$sumaDeVerificacionUrl" ];
+if [ "$sumaverificacion_imagen" == "$sumaverificacion_url" ];
 then
 	echo "Las sumas de verificacion coinciden"
 else
 	echo "Las sumas de verificacion no coinciden"
-	rm imagen.jpeg
-	rm sumaDeVerificacionUrl.txt
-	rm sumaDeVerificacionImagen.txt
+	rm imagen.zip
+	rm sumaverificacion_url.txt
+	rm sumaverificacion_imagen.txt
 	exit 1
 fi
 
-zip imagen.zip imagen.jpeg
-zip imagen.zip sumaDeVerificacionUrl.txt
-
-rm imagen.jpeg
-rm sumaDeVerificacionUrl.txt
-rm sumaDeVerificacionImagen.txt
+rm sumaverificacion_url.txt
+rm sumaverificacion_imagen.txt
 
 exit 0
