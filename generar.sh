@@ -7,7 +7,7 @@ fi
 
 cantidad=$1
 
-if [ $cantidad -lt 0 ];
+if [ $cantidad -lt 1 ];
 then
 	echo "Error. Debe ingresar una cantidad valida"
 	exit 1
