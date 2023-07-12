@@ -14,7 +14,20 @@ url_imagen=$1
 url_sumaverificacion=$2
 
 curl -L -o imagen.zip "$url_imagen"
+urlValid=$?
+if [ $urlValid -ne 0 ];
+then
+	echo "La url de la imagen es inválida"
+	exit 1
+fi
+
 curl -o sumaverificacion_url.txt "$url_sumaverificacion"
+urlValid=$?
+if [ $urlValid -ne 0 ];
+then
+	echo "La url de la suma de verificación es inválida"
+	exit 1
+fi
 
 sha256sum "imagen.zip" > sumaverificacion_imagen.txt
 sumaverificacion_imagen=$(cut -d " " -f 1 sumaverificacion_imagen.txt)
