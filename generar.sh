@@ -23,9 +23,6 @@ do
 	archivo=$(cut -d "," -f 1 Nombres.txt | tr " " "_"  | shuf -n 1)
 	curl -o "${archivo}.jpeg" "https://thispersondoesnotexist.com/"
 
-	# echo "Comprimimos archivo cambiando su tamaño"
-	# convert "${archivo}.jpeg" -gravity center -resize 512x512+0+0 -extent 512x512 "${archivo}.jpeg"
-
 	echo "Generamos checksum ${archivo}_suma_verificacion.txt"
 	sha256sum "$archivo.jpeg" > "${archivo}_suma_verificacion.txt"
 
