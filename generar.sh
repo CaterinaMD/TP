@@ -18,6 +18,11 @@ then
 	rm imagen.zip
 fi
 
+if [ -f suma_verificacion.txt ];
+then
+	rm suma_verificacion.txt
+fi
+
 for i in $(seq "$cantidad");
 do
 	archivo=$(cut -d "," -f 1 Nombres.txt | tr " " "_"  | shuf -n 1)
@@ -39,13 +44,16 @@ do
 
 	echo "Se ha creado \"${archivo}.jpeg\""
 
-	zip suma_v.zip "${archivo}_suma_verificacion.txt"
 	zip imagen.zip "${archivo}.jpeg"
-
+	
 	rm "${archivo}_suma_verificacion.txt"
 	rm "${archivo}.jpeg"
 
 	sleep 2
+	
 done
+
+echo "Generamos checksum imagen.zip"
+sha256sum imagen.zip | awk '{print $1}' > suma_verificacion.txt
 
 exit 0
