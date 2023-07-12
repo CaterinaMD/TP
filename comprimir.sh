@@ -24,12 +24,12 @@ if [ -d "archivo_descomprimido" ];
 then
 	generar="archivo_descomprimido"
 	total_imagenes=$(ls "$generar")
+	echo "$total_imagenes" > todas_las_imagenes.txt
 	mkdir todas_las_imagenes
-
-	for imagen in $total_imagenes;
-	do
-        	cp "$generar/$imagen" "todas_las_imagenes"
-	done
+        for imagen in $total_imagenes;
+        do
+                cp "$generar/$imagen" "todas_las_imagenes"
+        done
 else
 	echo "Error. Se debe ejecutar descomprimir.sh anteriormente."
 	exit 1
@@ -39,28 +39,30 @@ if [ -d "tamano_imagen" ];
 then
 	procesar="tamano_imagen"
 	nombres_val=$(ls "$procesar")
+	echo "$nombres_val" > nombres_validos.txt
 	mkdir nombres_validos
-	for nombre in $nombres_val;
-	do
-		cp "$procesar/$nombre" "nombres_validos"
-	done
+        for nombre in $nombres_val;
+        do
+                cp "$procesar/$nombre" "nombres_validos"
+        done
 else
 	echo "Error. Se debe ejecutar procesar.sh anteriormente."
 	exit 2
 fi
 
 mkdir total_personas_a
-echo "Creando archivo de personas que su nombre finaliza con la letra a."
+contador=0
 for nombres in $total_imagenes;
 do
 	if [[ $nombres == *a.jpeg ]];
 	then
-		echo "Agregando a $nombres"
 		cp "$generar/$nombres" "total_personas_a"
-	else
-		echo "$nombres no cumple con los requisitos."
+		contador=$((contador + 1))
 	fi
 done
-
-zip total_archivos.zip  todas_las_imagenes nombres_validos total_personas_a
+echo "$contador" > total_personas_a.txt
+zip total_archivos.zip  todas_las_imagenes todas_las_imagenes.txt nombres_validos nombres_validos.txt total_personas_a total_personas_a.txt
+rm total_personas_a.txt
+rm todas_las_imagenes.txt
+rm nombres_validos.txt
 exit 0
