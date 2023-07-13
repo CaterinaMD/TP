@@ -7,7 +7,6 @@ Maria Victoria Oviedo
 
 ### Tabla de contenidos:
 - [Descripcion](#Descripcion)
-- [Instalacion](#Instalacion)
 - [Uso](#Uso)
 - [Docker](#Docker)
 
