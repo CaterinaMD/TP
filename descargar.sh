@@ -13,15 +13,15 @@ fi
 url_imagen=$1
 url_sumaverificacion=$2
 
-curl -L -o imagen.zip "$url_imagen"
+curl -L -o imagen.zip --connect-timeout 5 "$url_imagen"
 urlValid=$?
 if [ $urlValid -ne 0 ];
 then
-	echo "La url de la imagen es inválida"
+	echo "La url de imagen es inválida"
 	exit 1
 fi
 
-curl -o sumaverificacion_url.txt "$url_sumaverificacion"
+curl -o sumaverificacion_url.txt --connect-timeout 5 "$url_sumaverificacion"
 urlValid=$?
 if [ $urlValid -ne 0 ];
 then
