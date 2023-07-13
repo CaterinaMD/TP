@@ -48,7 +48,9 @@ do
 done
 echo "$contador" > total_personas_a.txt
 
-zip total_archivos.zip  todas_las_imagenes todas_las_imagenes.txt nombres_validos.txt total_personas_a.txt
+zip -r total_archivos.zip  todas_las_imagenes todas_las_imagenes.txt nombres_validos.txt total_personas_a.txt
+mv total_archivos.zip carpetaZip/
+
 rm -r todas_las_imagenes
 rm total_personas_a.txt
 rm todas_las_imagenes.txt
