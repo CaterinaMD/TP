@@ -9,6 +9,7 @@ Maria Victoria Oviedo
 - [Descripcion](#Descripcion)
 - [Instalacion](#Instalacion)
 - [Uso](#Uso)
+- [Docker](#Docker)
 
 ### Descripcion
 El objetivo del trabajo práctico es diseñar y escribir un programa para 
@@ -26,17 +27,6 @@ procesadas y algunos datos extra.
 Todo el trabajo debe ser realizado bajo control de versiones, con participación
 de todos los integrantes y debe ejecutarse dentro de un contenedor.
 
-#### Instalacion
-Para evitar problemas al ejecutar este trabajo, deberas tener instalado lo
-siguiente:
-
-1-**ImageMagick**:
-Para instalarlo deberas ingresar el siguiente comando por la terminal:
-sudo apt-get install imagemagick
-2-**Curl**:
-Para instalarlo deberas ingresar el siguiente comando por la terminal:
-sudo apt-get install curl
-
 ##### Uso
 -**generar.sh**:
 
@@ -44,8 +34,8 @@ Este script de Bash permite generar imágenes aleatorias descargadas de "https:/
 Descripción del Script:
 -Verificación de argumentos: verifica si se ha ingresado el argumento correctamente.
 -Eliminación de archivos existentes: si los archivos que voy a crear y usar ya están creados, son eliminados.
--Generación de imágenes: Se extrae un nombre aleatorio del archivo "Nombres.txt" y es utilizado para la imagen generada.
--Generación del checksum para el archivo ZIP: se genera la suma de verificación.
+-Generación de imágenes: Se extrae un nombre aleatorio del archivo "Nombres.txt" y es utilizado para la imagen generada (reemplazando espacios por guion bajo).
+-Generación de la suma de verificacion para el archivo ZIP.
 
 Ejemplo de comando: ./generar_imagenes.sh <cantidad>
 
@@ -53,8 +43,10 @@ Ejemplo de comando: ./generar_imagenes.sh <cantidad>
 
 Este script en Bash descarga un archivo de imagen ZIP y verifica su integridad.
 Descripción del script:
--Con el URL proporcionado descarga el archivo de imagen ZIP y con la otra URL de verificacion.
--Los URL para probar el script son los siguientes:
+-Con el primer URL proporcionado descarga el archivo de imagen ZIP y con la otra URL descarga la suma verificacion. Luego chequea que la suma de verificacion del zip coincida con lo descargado en la segunda URL.
+-Chequea que las URLs sean válidas.
+
+Los URL para probar el script son los siguientes:
 -url_imagen: https://github.com/victoria-oviedo/imagen.zip/raw/main/imagen.zip
 -url_sumaverificacion: https://raw.githubusercontent.com/victoria-oviedo/sumaverificacion.txt/main/suma_verificacion.txt
 
@@ -66,14 +58,14 @@ Este script en Bash descomprime el archivo "imagen.zip" y crea una carpeta llama
 Descripción del script:
 -Verifica si el archivo "imagen.zip" existe. Si el archivo no existe, muestra un mensaje y finaliza la ejecución. sino descomprime el zip y lo almacena en "archivo_descomprimido".
 
-requisitos:
-Debes asegurarte de que el archivo "imagen.zip" esté presente en el mismo directorio.
+Requisitos:
+Debes asegurarte de que el archivo "imagen.zip" esté presente en el mismo directorio (este se genera con generar.sh o descargar.sh).
 
 Ejemplo de comando:  ./descomprimir.sh
 
 -**procesar.sh**:
 
-Este script se encarga recortar imagenes el cual dependiendo si el nombre cumple con ciertos requisitos.
+Este script se encarga recortar solo las imagenes que cumplen con ciertos requisitos.
 Descripcion del script:
 -Verificar que exista el directorio "archivo_comprimido".
 -Crea un directorio llamado "tamano_imagen", el cual si existe anteriormente lo elimina.
@@ -90,15 +82,15 @@ Ejemplo de ejecucion: ./procesar.sh
 
 -**comprimir.sh**:
 
-Este script se encarga de almacenar copiar archivos de un directorio a otro para luego almacenarlos en un mismo zip.
+Este script se encarga de generar un zip con las imagenes procesadas y algunos datos extras.
 Descripcion del script:
--Verifica que si hay unos directorios en especifico, en caso de existir los elimina.
--Verifica si existe el "archivo_descomprimido" y "tamano_imagen", si existen genera una copia y un archivo.txt. caso contrario, emite un mensaje y finaliza la ejecucion.
--Si el nombre de un archivo finaliza con la letra a, se inicializa un contador y genera un archivo.txt con el total.
--Luego las copias generadas son almacenadas en un zip llamado "total_archivos.zip".
+-Verifica si existe el "archivo_descomprimido" y "tamano_imagen"
+	-> Si existen genera 3 archivos ".txt" (list de todos los nombre, list de todos los nombres válidos, cantidad total de nombres que terminan con la letra a)
+	-> Caso contrario, emite un mensaje y finaliza la ejecucion.
+-Luego los txt y la carpeta de imagenes son almacenadas en un zip llamado "total_archivos.zip" que se guarda en carpetaZip.
 
-requisitos:
--Se debera ejecutar anteriormente generar.sh y descomprimir.sh para obtener "archivo_descomprimido" y "tamano_imagen"
+Requisitos:
+-Se debera ejecutar anteriormente procesar.
 
 Ejemplo de ejecucion: ./comprimir.sh
 
@@ -115,3 +107,21 @@ Descripcion del script:
 -comprimir.sh: Comprime archivos.
 
 Ejemplo de ejecucion: ./menu.sh
+
+
+### Docker
+
+cd directorio_donde_clonar
+git clone https://github.com/CaterinaMD/TP.git
+cd TP
+
+# Contruimos imagen del docker
+sudo docker build . --tag tp:1.0
+
+# Vemos directorio actual
+pwd
+
+# Corremos nuestra imagen con un directorio real y uno dentro del docker
+sudo docker run -v /home/vicky/Escritorio:/var/carpetaZip -it tp:1.0
+
+# El zip generado queda guardado en /home/vicky/Escritorio
