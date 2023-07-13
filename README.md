@@ -38,7 +38,7 @@ Para instalarlo deberas ingresar el siguiente comando por la terminal:
 sudo apt-get install curl
 
 ##### Uso
--*generar.sh*:
+-**generar.sh**:
 
 Este script de Bash permite generar imágenes aleatorias descargadas de "https://thispersondoesnotexist.com/"
 Descripción del Script:
@@ -49,7 +49,7 @@ Descripción del Script:
 
 Ejemplo de comando: ./generar_imagenes.sh <cantidad>
 
--*descargar.sh*:
+-**descargar.sh**:
 
 Este script en Bash descarga un archivo de imagen ZIP y verifica su integridad.
 Descripción del script:
@@ -60,7 +60,7 @@ Descripción del script:
 
 Ejemplo de comando: ./descargar.sh (url_imagen) (url_sumaverificacion)
 
--*descomprimir.sh*:
+-**descomprimir.sh**:
 
 Este script en Bash descomprime el archivo "imagen.zip" y crea una carpeta llamado "archivo_descomprimido".
 Descripción del script:
@@ -71,7 +71,7 @@ Debes asegurarte de que el archivo "imagen.zip" esté presente en el mismo direc
 
 Ejemplo de comando:  ./descomprimir.sh
 
--*procesar.sh*:
+-**procesar.sh**:
 
 Este script se encarga recortar imagenes el cual dependiendo si el nombre cumple con ciertos requisitos.
 Descripcion del script:
@@ -88,7 +88,7 @@ Requisitos:
 
 Ejemplo de ejecucion: ./procesar.sh
 
--*comprimir.sh*:
+-**comprimir.sh**:
 
 Este script se encarga de almacenar copiar archivos de un directorio a otro para luego almacenarlos en un mismo zip.
 Descripcion del script:
@@ -102,7 +102,7 @@ requisitos:
 
 Ejemplo de ejecucion: ./comprimir.sh
 
--*menu*:
+-**menu.sh**:
 
 Este script proporciona un menú de opciones para ejecutar diferentes comandos y scripts. 
 Cada opción realiza una operación específica, como generar imágenes, descargar archivos, descomprimir archivos, procesar datos o comprimir archivos.
