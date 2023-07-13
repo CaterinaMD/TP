@@ -1,6 +1,6 @@
-#**TUIA - TP ENTORNO DE PROGRAMACION**
+# **TUIA - TP ENTORNO DE PROGRAMACION**
 
-##Integrantes:
+## Integrantes:
 Andres Martinez Bilesio
 Caterina Martinez Dufour
 Maria Victoria Oviedo
@@ -115,13 +115,13 @@ cd directorio_donde_clonar
 git clone https://github.com/CaterinaMD/TP.git
 cd TP
 
-# Contruimos imagen del docker
+#Contruimos imagen del docker
 sudo docker build . --tag tp:1.0
 
-# Vemos directorio actual
+#Vemos directorio actual
 pwd
 
-# Corremos nuestra imagen con un directorio real y uno dentro del docker
+#Corremos nuestra imagen con un directorio real y uno dentro del docker
 sudo docker run -v /home/vicky/Escritorio:/var/carpetaZip -it tp:1.0
 
-# El zip generado queda guardado en /home/vicky/Escritorio
+#El zip generado queda guardado en /home/vicky/Escritorio
